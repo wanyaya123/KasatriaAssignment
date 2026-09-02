@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kasatria 3D Data Visualization</title>
+	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23050816'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' fill='%238ff'%3EK%3C/text%3E%3C/svg%3E">
+	<link rel="stylesheet" href="./css/styles.css">
+
+	<!-- Google Sign-In library -->
+	<script src="https://accounts.google.com/gsi/client" async defer onload="window.onGoogleLibraryLoad?.()"></script>
+
+	<!-- Tells the browser where to load Three.js from -->
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+				"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+			}
+		}
+	</script>
+</head>
+<body>
+
+	<!-- Login page — shown first, hidden after Google sign-in -->
+	<section id="login-screen">
+		<div class="login-card">
+			<h1>Kasatria Assignment</h1>
+			<p>Sign in with Google to view the 3D data visualization powered by your Google Sheet.</p>
+			<div id="google-signin-button"></div>
+			<div id="auth-error" class="auth-error" hidden></div>
+			<div id="auth-warning" hidden>
+				Add your Google OAuth Client ID in <code>js/config.js</code> before submitting.
+			</div>
+		</div>
+	</section>
+
+	<!-- Main app — 3D visualization, shown after login -->
+	<section id="app-screen" hidden>
+		<div id="top-bar">
+			<div id="title-block">
+				<h2>Kasatria 3D Data Visualization</h2>
+				<p id="status-message">Preparing visualization...</p>
+			</div>
+			<div id="user-profile" hidden>
+				<img id="user-avatar" alt="User avatar" referrerpolicy="no-referrer">
+				<div class="user-details">
+					<div id="user-name"></div>
+					<div id="user-email"></div>
+				</div>
+				<button id="logout-btn" type="button">Log out</button>
+			</div>
+		</div>
+
+		<!-- Colour key for net worth tiers -->
+		<div id="legend">
+			<div class="legend-item"><span class="legend-swatch red"></span> Net Worth &lt; $100K</div>
+			<div class="legend-item"><span class="legend-swatch orange"></span> Net Worth &gt; $100K</div>
+			<div class="legend-item"><span class="legend-swatch green"></span> Net Worth &gt; $200K</div>
+		</div>
+
+		<!-- Three.js renders the 3D tiles here -->
+		<div id="container"></div>
+
+		<!-- Buttons to switch between layout modes -->
+		<div id="menu">
+			<button id="table" type="button">TABLE</button>
+			<button id="sphere" type="button">SPHERE</button>
+			<button id="helix" type="button">HELIX</button>
+			<button id="grid" type="button">GRID</button>
+			<button id="tetrahedron" type="button">TETRAHEDRON</button>
+		</div>
+	</section>
+
+	<script type="module" src="./js/app.js"></script>
+</body>
+</html>
